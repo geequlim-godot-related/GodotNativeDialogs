@@ -1,0 +1,7 @@
+.vscode
+*.o
+*.obj
+*.lib
+*.so
+*.a
+*.pyc
