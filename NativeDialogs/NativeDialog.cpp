@@ -7,6 +7,10 @@
 #include <Winnls.h>
 #endif
 
+#ifdef ND_PLATFORM_WIN
+#pragma comment(lib , "Comdlg32.lib")
+#endif
+
 namespace NativeDialog
 {
     /// The event handler do nothing

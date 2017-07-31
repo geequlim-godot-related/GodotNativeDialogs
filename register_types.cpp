@@ -101,7 +101,7 @@ public:
     virtual void show() override {
         auto dialog = dynamic_cast<NativeDialog::MessageDialog*>(m_pDialog);
         if (dialog) {
-            dialog->setMessage(str2std(message));
+            dialog->setMessage(message.utf8().ptr());
             std::vector<std::string> vbtns;
             for (int i=0; i < buttons.size(); ++i) {
                 vbtns.push_back(str2std(buttons[i]));
@@ -112,10 +112,10 @@ public:
     }
 
     String get_response_button_title() const {
-
+		String ss;
         if(auto dialog = dynamic_cast<NativeDialog::MessageDialog*>(m_pDialog))
-            return String(dialog->responseButtonTitle().c_str());
-        return String();
+            ss.parse_utf8(dialog->responseButtonTitle().c_str());
+        return ss;
     }
 
     int get_response_button_index() const {
@@ -173,7 +173,7 @@ public:
     virtual void show() override {
         auto dialog = dynamic_cast<NativeDialog::FileDialog*>(m_pDialog);
         if (dialog) {
-            dialog->setMode(u_int32_t(mode));
+            dialog->setMode(int(mode));
             dialog->setDefaultPath(str2std(default_path));
         }
         GDNativeDialog::show();
@@ -187,9 +187,13 @@ public:
 
     Array get_selected_pathes() const {
         Array pathes;
+
         if (auto dialog = dynamic_cast<NativeDialog::FileDialog*>(m_pDialog) ) {
-            for(const std::string& p : dialog->selectedPathes())
-                pathes.append(p.c_str());
+            for(const std::string& p : dialog->selectedPathes()) {
+				String ss = "";
+				ss.parse_utf8(p.c_str(), p.length());
+                pathes.append(ss);
+			}
         }
         return pathes;
     }

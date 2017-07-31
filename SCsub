@@ -10,9 +10,16 @@ env_module.Append(
 	CXXFLAGS="-std=c++14"
 )
 env_module.add_source_files(env.modules_sources,"NativeDialogs/*.cpp")
-env_module.add_source_files(env.modules_sources,"NativeDialogs/gtk/*.cpp")
 env_module.add_source_files(env.modules_sources,"*.cpp")
 
 if env["platform"] == "x11":
 	env_module.ParseConfig('pkg-config --cflags gtk+-3.0')
 	env.ParseConfig('pkg-config --libs gtk+-3.0')
+	env_module.add_source_files(env.modules_sources,"NativeDialogs/gtk/*.cpp")
+elif env["platform"] == "windows":
+	env_module.add_source_files(env.modules_sources,"NativeDialogs/win/*.cpp")
+	env_module.add_source_files(env.modules_sources,"NativeDialogs/win/bubble/*.cpp")
+	env_module.Append(CCFLAGS=["/D", "_UNICODE", "/D", "UNICODE"])
+	env['LINKCOM'] = [env['LINKCOM'], 'mt.exe -nologo -manifest ${TARGET}.manifest -outputresource:$TARGET;1']
+elif env["platform"] == "osx":
+	env_module.add_source_files(env.modules_sources,"NativeDialogs/osx/*.mm")
