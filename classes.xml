@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc version="3.0.alpha.custom_build" name="Engine Types">
+<class name="GDNativeDialog" inherits="Reference" category="Core">
+	<brief_description>
+	</brief_description>
+	<description>
+		原生对话框基类，该类为抽象类不要用于创建实体。
+	</description>
+	<methods>
+		<method name="get_title" qualifiers="const">
+			<return type="String">
+			</return>
+			<description>
+			</description>
+		</method>
+		<method name="set_title">
+			<argument index="0" name="p_title" type="String">
+			</argument>
+			<description>
+			</description>
+		</method>
+		<method name="show">
+			<description>
+				显示原生对话框，该操作根据系统和功能需要可能会暂停程序。
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="title" type="String" setter="set_title" getter="get_title" brief="">
+			对话框标题文本。
+		</member>
+	</members>
+	<signals>
+		<signal name="canceled">
+			<description>
+				用户关闭对话框或点击取消时派发的信号。
+			</description>
+		</signal>
+		<signal name="confirmed">
+			<description>
+				用户做出选择后派发的信号。
+			</description>
+		</signal>
+	</signals>
+	<constants>
+	</constants>
+</class>
+<class name="NativeColorDialog" inherits="GDNativeDialog" category="Core">
+	<brief_description>
+	</brief_description>
+	<description>
+		原生选择颜色对话框
+	</description>
+	<methods>
+		<method name="get_color" qualifiers="const">
+			<return type="Color">
+			</return>
+			<description>
+			</description>
+		</method>
+		<method name="set_color">
+			<argument index="0" name="color" type="Color">
+			</argument>
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="color" type="Color" setter="set_color" getter="get_color" brief="">
+			对话框选中的颜色。
+		</member>
+	</members>
+	<constants>
+	</constants>
+</class>
+<class name="NativeFileDialog" inherits="GDNativeDialog" category="Core">
+	<brief_description>
+	</brief_description>
+	<description>
+		原生文件选择对话框，对话框的功能和外观将根据该对象的mode属性决定。
+	</description>
+	<methods>
+		<method name="add_filter">
+			<argument index="0" name="title" type="String">
+			</argument>
+			<argument index="1" name="extentions" type="String">
+			</argument>
+			<description>
+			添加组文件筛选器 add_filter("文本文件", "txt;TXT") 来添加一组允许选择后缀是txt或TXT的文件筛选器。
+			可以将第二个参数设为 * 来允许选择所有后缀的文件。
+			</description>
+		</method>
+		<method name="cleanup">
+			<description>
+			清除所有对该对话窗的设置，包括选中的文件和添加的筛选器。
+			</description>
+		</method>
+		<method name="clear_filters">
+			<description>
+			清除所有筛选器
+			</description>
+		</method>
+		<method name="get_default_path" qualifiers="const">
+			<return type="String">
+			</return>
+			<description>
+			</description>
+		</method>
+		<method name="get_mode" qualifiers="const">
+			<return type="int">
+			</return>
+			<description>
+			</description>
+		</method>
+		<method name="get_selected_pathes" qualifiers="const">
+			<return type="Array">
+			</return>
+			<description>
+			获取所有选中的绝对路径，返回一个字符串数组。
+			</description>
+		</method>
+		<method name="set_default_path">
+			<argument index="0" name="buttons" type="String">
+			</argument>
+			<description>
+			</description>
+		</method>
+		<method name="set_mode">
+			<argument index="0" name="mode" type="int">
+			</argument>
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="default_path" type="String" setter="set_default_path" getter="get_default_path" brief="">
+			对话框打开时默认显示（选择）的绝对路径。
+		</member>
+		<member name="mode" type="int" setter="set_mode" getter="get_mode" brief="">
+			文件对话框的的选择模式，决定弹出后的功能和UI界面，由该类的MODE_大头的常量来组合。
+		</member>
+	</members>
+	<constants>
+		<constant name="MODE_SELECT_FILE" value="1">
+		选择文件
+		</constant>
+		<constant name="MODE_SELECT_DIR" value="2">
+		选择目录
+		</constant>
+		<constant name="MODE_SELECT_FILE_DIR" value="3">
+		选择文件或目录
+		</constant>
+		<constant name="MODE_MULTI_SELECT" value="4">
+		允许多选
+		</constant>
+		<constant name="MODE_SAVE" value="8">
+		保存文件
+		</constant>
+	</constants>
+</class>
+<class name="NativeMessageDialog" inherits="GDNativeDialog" category="Core">
+	<brief_description>
+	</brief_description>
+	<description>
+	原生消息对话框
+	</description>
+	<methods>
+		<method name="get_buttons" qualifiers="const">
+			<return type="Array">
+			</return>
+			<description>
+			</description>
+		</method>
+		<method name="get_message" qualifiers="const">
+			<return type="String">
+			</return>
+			<description>
+			</description>
+		</method>
+		<method name="get_response_button_index" qualifiers="const">
+			<return type="int">
+			</return>
+			<description>
+			获取用户点击的按钮下标。
+			</description>
+		</method>
+		<method name="get_response_button_title" qualifiers="const">
+			<return type="String">
+			</return>
+			<description>
+			获取用户点击的按钮标题。
+			</description>
+		</method>
+		<method name="set_buttons">
+			<argument index="0" name="buttons" type="Array">
+			</argument>
+			<description>
+			</description>
+		</method>
+		<method name="set_message">
+			<argument index="0" name="message" type="String">
+			</argument>
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="buttons" type="Array" setter="set_buttons" getter="get_buttons" brief="">
+		字符串数组，对话框显示时根据此数组的内容创建按钮。
+		</member>
+		<member name="message" type="String" setter="set_message" getter="get_message" brief="">
+		提示消息文本。
+		</member>
+	</members>
+	<constants>
+	</constants>
+</class>
+</doc>
