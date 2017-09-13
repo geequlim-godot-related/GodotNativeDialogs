@@ -173,8 +173,12 @@ public:
     virtual void show() override {
         auto dialog = dynamic_cast<NativeDialog::FileDialog*>(m_pDialog);
         if (dialog) {
-            dialog->setMode(int(mode));
-            dialog->setDefaultPath(str2std(default_path));
+			dialog->setMode(int(mode));
+#ifdef WIN32
+			dialog->setDefaultPath(str2std(default_path.replace("\\", "/")));
+#else
+			dialog->setDefaultPath(str2std(default_path));
+#endif
         }
         GDNativeDialog::show();
     }
