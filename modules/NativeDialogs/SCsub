@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+
+Import('env')
+env_module = env.Clone()
+sources = []
+if env_module["platform"] == "linux":
+	env_module.Append(CXXFLAGS='-D_GLIBCXX_USE_CXX11_ABI=0')
+	env_module.ParseConfig('pkg-config --cflags gtk+-3.0')
+	env_module.ParseConfig('pkg-config --libs gtk+-3.0')
+	sources += env_module.add_source_files("NativeDialogs/gtk/*.cpp")
+elif env_module["platform"] == "windows":
+	sources += env_module.add_source_files("NativeDialogs/win/*.cpp")
+	sources += env_module.add_source_files("NativeDialogs/win/bubble/*.cpp")
+	env_module.Append(CCFLAGS=["/D", "_UNICODE", "/D", "UNICODE"])
+	env_module['LINKCOM'] = [env_module['LINKCOM'], 'mt.exe -nologo -manifest ${TARGET}.manifest -outputresource:$TARGET;1']
+elif env_module["platform"] == "osx":
+	sources += env_module.add_source_files("NativeDialogs/osx/*.mm")
+sources += env_module.add_source_files("NativeDialogs/NativeDialog.cpp")
+
+sources += env_module.add_source_files("*.cpp")
+
+env_module.SharedLibrary(target='bin/native_dialogs', source=sources)

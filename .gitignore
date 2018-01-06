@@ -1,0 +1,26 @@
+.vscode
+
+# dependencies
+cpp_bindings
+godot_headers
+
+# C++
+*.so
+*.os
+*.o
+*.obj
+*.lib
+*.dll
+*.dylib
+
+# scons
+*.dblite
+*.
+
+# QtCreator
+*.config
+*.creator
+*.creator.user
+*.files
+*.includes
+*.import
