@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="GDNativeDialog" inherits="Reference" category="Core" version="3.0-beta">
+	<brief_description>
+	</brief_description>
+	<description>
+		原生对话框基类，该类为抽象类不要用于创建实体。
+	</description>
+	<tutorials>
+	</tutorials>
+	<demos>
+	</demos>
+	<methods>
+		<method name="show">
+			<return type="void">
+			</return>
+			<description>
+				显示原生对话框，该操作根据系统和功能需要可能会暂停程序。
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="title" type="String" setter="set_title" getter="get_title">
+			对话框标题文本。
+		</member>
+	</members>
+	<signals>
+		<signal name="canceled">
+			<description>
+				用户关闭对话框或点击取消时派发的信号。
+			</description>
+		</signal>
+		<signal name="confirmed">
+			<description>
+				用户做出选择后派发的信号。
+			</description>
+		</signal>
+	</signals>
+	<constants>
+	</constants>
+</class>

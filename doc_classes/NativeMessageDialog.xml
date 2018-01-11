@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="NativeMessageDialog" inherits="GDNativeDialog" category="Core" version="3.0-beta">
+	<brief_description>
+	</brief_description>
+	<description>
+		原生消息对话框
+	</description>
+	<tutorials>
+	</tutorials>
+	<demos>
+	</demos>
+	<methods>
+		<method name="get_response_button_index" qualifiers="const">
+			<return type="int">
+			</return>
+			<description>
+				获取用户点击的按钮下标。
+			</description>
+		</method>
+		<method name="get_response_button_title" qualifiers="const">
+			<return type="String">
+			</return>
+			<description>
+				获取用户点击的按钮标题。
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="buttons" type="PoolStringArray" setter="set_buttons" getter="get_buttons">
+			对话框显示时根据此数组的内容创建按钮。
+		</member>
+		<member name="message" type="String" setter="set_message" getter="get_message">
+			提示消息文本。
+		</member>
+	</members>
+	<constants>
+	</constants>
+</class>

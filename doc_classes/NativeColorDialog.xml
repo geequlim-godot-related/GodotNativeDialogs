@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="NativeColorDialog" inherits="GDNativeDialog" category="Core" version="3.0-beta">
+	<brief_description>
+	</brief_description>
+	<description>
+		原生选择颜色对话框
+	</description>
+	<tutorials>
+	</tutorials>
+	<demos>
+	</demos>
+	<methods>
+	</methods>
+	<members>
+		<member name="color" type="Color" setter="set_color" getter="get_color">
+			对话框选中的颜色。
+		</member>
+	</members>
+	<constants>
+	</constants>
+</class>

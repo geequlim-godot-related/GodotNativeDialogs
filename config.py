@@ -5,3 +5,14 @@ def can_build(platform):
 
 def configure(env):
 	pass
+
+def get_doc_classes():
+    return [
+        "GDNativeDialog",
+        "NativeColorDialog",
+        "NativeFileDialog",
+        "NativeMessageDialog",
+    ]
+
+def get_doc_path():
+    return "doc_classes"
