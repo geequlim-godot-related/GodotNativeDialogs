@@ -121,7 +121,7 @@ namespace godot {
     public:
 
         enum Mode {
-            MODE_SELECT_FILE     = NativeDialog::FileDialog::SELECT_FILE,
+          MODE_SELECT_FILE     = NativeDialog::FileDialog::SELECT_FILE,
             MODE_SELECT_DIR      = NativeDialog::FileDialog::SELECT_DIR,
             MODE_SELECT_FILE_DIR = NativeDialog::FileDialog::SELECT_FILE_DIR ,
             MODE_MULTI_SELECT    = NativeDialog::FileDialog::MULTI_SELECT,
@@ -252,19 +252,18 @@ namespace godot {
 #endif
 
 /** GDNative Initialize **/
-GDNATIVE_INIT(godot_gdnative_init_options *options) {
+void GDNATIVE_INIT(godot_gdnative_init_options *options) {
 #ifdef ND_PLATFORM_GTK
     gtk_init(nullptr, nullptr);
 #endif
 }
 
 /** GDNative Terminate **/
-GDNATIVE_TERMINATE(godot_gdnative_terminate_options *options) {
-
+void GDNATIVE_TERMINATE(godot_gdnative_terminate_options *options) {
 }
 
 /** NativeScript Initialize **/
-NATIVESCRIPT_INIT() {
+void NATIVESCRIPT_INIT() {
     register_class<GDNativeDialog>();
     register_class<NativeMessageDialog>();
     register_class<NativeFileDialog>();
