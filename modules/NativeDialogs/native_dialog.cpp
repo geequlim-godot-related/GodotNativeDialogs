@@ -3,11 +3,13 @@
 #include "NativeDialogs/NativeDialog.h"
 #include <codecvt>
 #include <locale>
+#include <iostream>
+#include <string>
 using namespace godot;
 
 namespace godot {
 
-    class GDNativeDialog : public GodotScript<Reference> {
+    class GDNativeDialog : public Reference {
         GODOT_SUBCLASS(GDNativeDialog, Reference);
     public:
         GDNativeDialog(): m_pDialog(nullptr) { }
@@ -32,11 +34,11 @@ namespace godot {
         virtual void _bind_callbacks() {
 
             m_pDialog->setDecideHandler([this](const NativeDialog::Dialog&){
-                owner->emit_signal("confirmed");
+                this->emit_signal("confirmed");
             });
 
             m_pDialog->setCancelHandler([this](const NativeDialog::Dialog&){
-                owner->emit_signal("canceled");
+                this->emit_signal("canceled");
             });
         }
 
@@ -46,8 +48,10 @@ namespace godot {
             register_method("get_title", &GDNativeDialog::get_title);
             register_method("show", &GDNativeDialog::show);
             register_property<GDNativeDialog, String>("title", &GDNativeDialog::title, "");
-            register_signal<GDNativeDialog>("confirmed");
-            register_signal<GDNativeDialog>("canceled");
+			godot::String confirmed = "confirmed";
+            godot::String canceled = "canceled";
+            register_signal<GDNativeDialog>(confirmed, {});
+            register_signal<GDNativeDialog>(canceled, {});
         }
 
     };
@@ -60,11 +64,9 @@ namespace godot {
             m_pDialog = new NativeDialog::MessageDialog("", "", {});
             _bind_callbacks();
         }
-
         ~NativeMessageDialog() {
             delete (static_cast<NativeDialog::MessageDialog*>(m_pDialog));
         }
-
         virtual void show() override {
             auto dialog = dynamic_cast<NativeDialog::MessageDialog*>(m_pDialog);
             if (dialog) {
